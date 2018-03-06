@@ -18,7 +18,6 @@ import ml.Distance;
 import ml.GaussianNB;
 import ml.KNN;
 import ml.NearestCentroid;
-import ml.Distance.Metric;
 
 public class IrisClassification {
 

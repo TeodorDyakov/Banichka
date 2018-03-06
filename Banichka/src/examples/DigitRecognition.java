@@ -15,7 +15,6 @@ import ml.Data;
 import ml.Distance;
 import ml.GaussianNB;
 import ml.KNN;
-import ml.Distance.Metric;
 
 public class DigitRecognition {
 	public static void main(String[] args) throws IOException {

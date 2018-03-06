@@ -22,5 +22,6 @@ public class SexClassification {
 		GaussianNB nb = new GaussianNB();
 		nb.train(data);
 		System.out.println(nb.classify(new Data(null, new double[] { 6, 130, 8 })));
+		System.out.println(nb.stats);
 	}
 }

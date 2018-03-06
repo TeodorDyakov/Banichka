@@ -9,7 +9,7 @@ public class Data {
 		return "Data [category=" + category + ", features=" + Arrays.toString(features) + "]";
 	}
 
-	String category;
+	public String category;
 	double[] features;
 
 	public Data(String category, double[] features) {

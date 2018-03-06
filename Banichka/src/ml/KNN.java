@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 public class KNN {
 
-	String classify(Data m, List<Data> trainSet, Distance.Metric d, int k) {
+	public String classify(Data m, List<Data> trainSet, Distance.Metric d, int k) {
 		double[] distance = new double[trainSet.size()];
 		Map<String, Integer> freq = new HashMap<>();
 		for (int i = 0; i < trainSet.size(); i++)

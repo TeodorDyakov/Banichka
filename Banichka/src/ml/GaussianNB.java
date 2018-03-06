@@ -16,7 +16,7 @@ public class GaussianNB {
 	Map<String, List<NormalDistribution>> stdDistributionOfFeatures = new HashMap<>();
 	Map<String, Integer> countInCategory = new HashMap<>();
 
-	void train(List<Data> trainSet) {
+	public void train(List<Data> trainSet) {
 		totalNodes = trainSet.size();
 		for (Entry<String, List<Data>> e : categoryToNodes(trainSet).entrySet()) {
 			List<NormalDistribution> dForCat = new ArrayList<>();
@@ -40,7 +40,7 @@ public class GaussianNB {
 		}
 	}
 
-	String classify(Data node) {
+	public String classify(Data node) {
 		double max = Double.NEGATIVE_INFINITY;
 		String MAP = "";
 		for (Entry<String, List<NormalDistribution>> e : stdDistributionOfFeatures.entrySet()) {

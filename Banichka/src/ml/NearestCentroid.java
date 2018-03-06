@@ -29,7 +29,7 @@ public class NearestCentroid {
 		centroids = new ArrayList<>(catToCentroid.values());
 	}
 
-	String classify(Data node, Distance.Metric d) {
+	public String classify(Data node, Distance.Metric d) {
 		String closest = null;
 		double dist = Integer.MAX_VALUE;
 		for (Data centroid : centroids) {

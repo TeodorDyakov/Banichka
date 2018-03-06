@@ -16,7 +16,7 @@ import ml.Distance;
 import ml.GaussianNB;
 import ml.KNN;
 
-public class DigitRecognition {
+public class HandwrittenDigitRecognition {
 	public static void main(String[] args) throws IOException {
 		KNN knn = new KNN();
 		File csvData = new File("digits.txt");

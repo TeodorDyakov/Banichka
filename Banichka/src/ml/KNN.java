@@ -5,13 +5,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class KNN {
+public class KNN implements Classifier {
 
-	public String classify(Data m, List<Data> trainSet, Distance.Function d, int k) {
+	List<Data> trainSet;
+	Distance.Function distanceFunction;
+	int k;
+
+	public void train(List<Data> trainSet, Distance.Function d, int k) {
+		this.trainSet = trainSet;
+		this.distanceFunction = d;
+		this.k = k;
+	}
+
+	@Override
+	public String classify(Data m) {
+
 		double[] distance = new double[trainSet.size()];
 		Map<String, Integer> freq = new HashMap<>();
 		for (int i = 0; i < trainSet.size(); i++)
-			distance[i] = Distance.distance(m, trainSet.get(i), d);
+			distance[i] = Distance.distance(m, trainSet.get(i), distanceFunction);
 
 		for (int j = 0; j < k; j++) {
 

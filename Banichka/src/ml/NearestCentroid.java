@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NearestCentroid {
+public class NearestCentroid implements Classifier {
 
 	Collection<Data> centroids;
+	Distance.Function distanceFunction;
 
-	public void train(List<Data> train) {
+	public void train(List<Data> train, Distance.Function d) {
+		this.distanceFunction = d;
 		Map<String, Integer> map = new HashMap<>();
 		Map<String, Data> catToCentroid = new HashMap<>();
 		for (Data node : train) {
@@ -33,12 +35,13 @@ public class NearestCentroid {
 		centroids = new ArrayList<>(catToCentroid.values());
 	}
 
-	public String classify(Data node, Distance.Function d) {
+	@Override
+	public String classify(Data node) {
 		String closest = null;
 		double dist = Integer.MAX_VALUE;
 		for (Data centroid : centroids) {
-			if (dist > Distance.distance(node, centroid, d)) {
-				dist = Distance.distance(node, centroid, d);
+			if (dist > Distance.distance(node, centroid, distanceFunction)) {
+				dist = Distance.distance(node, centroid, distanceFunction);
 				closest = centroid.category;
 			}
 		}

@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-public class GaussianNB {
+public class GaussianNB implements Classifier {
 
 	int totalNodes = 0;
 
@@ -46,6 +46,7 @@ public class GaussianNB {
 		}
 	}
 
+	@Override
 	public String classify(Data node) {
 		double max = Double.NEGATIVE_INFINITY;
 		String MAP = null;

@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class NearestCentroid {
+
 	Collection<Data> centroids;
-	Map<String, Integer> map = new HashMap<>();
 
 	public void train(List<Data> train) {
+		Map<String, Integer> map = new HashMap<>();
 		Map<String, Data> catToCentroid = new HashMap<>();
 		for (Data node : train) {
 			map.put(node.category, map.getOrDefault(node.category, 0) + 1);
@@ -21,6 +22,7 @@ public class NearestCentroid {
 			for (int i = 0; i < node.features.length; i++) {
 				centroid.features[i] += node.features[i];
 			}
+
 			catToCentroid.putIfAbsent(centroid.category, centroid);
 		}
 		for (Data node : catToCentroid.values()) {
@@ -31,7 +33,7 @@ public class NearestCentroid {
 		centroids = new ArrayList<>(catToCentroid.values());
 	}
 
-	public String classify(Data node, Distance.Metric d) {
+	public String classify(Data node, Distance.Function d) {
 		String closest = null;
 		double dist = Integer.MAX_VALUE;
 		for (Data centroid : centroids) {

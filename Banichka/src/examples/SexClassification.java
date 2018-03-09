@@ -10,6 +10,7 @@ public class SexClassification {
 	public static void main(String[] args) {
 
 		List<Data> data = new ArrayList<>();
+		
 		data.add(new Data("male", new double[] { 6, 180, 12 }));
 		data.add(new Data("male", new double[] { 5.92, 190, 11 }));
 		data.add(new Data("male", new double[] { 5.58, 170, 12 }));
@@ -22,6 +23,5 @@ public class SexClassification {
 		GaussianNB nb = new GaussianNB();
 		nb.train(data);
 		System.out.println(nb.classify(new Data(null, new double[] { 6, 130, 8 })));
-		System.out.println(nb.stats);
 	}
 }

@@ -5,20 +5,20 @@ import java.util.Arrays;
 public class Perceptron {
 	double bias = 0.5;
 
-	double[][] inputs = new double[][] { { 10, 9 }, { 10, 10 }, { 9, 9 }, { 1, 1 }, { 2, 1 }, { 3, 3 },
-			{ 20, 20 }, { 21, 20 } };
-	double[] weights = new double[inputs[0].length];
-	int[] inputClasses = new int[] { 1, 1, 1, 0, 0, 0, 0, 1, 1 };
+	double[][] inputs;
+	double[] weights;
+	int[] inputClasses;
 	int epoch = 100;
 
 	public Perceptron() {
 
 	}
 
-	public Perceptron(double[][] inputs, int[] inputClasses) {
+	public Perceptron(double[][] inputs, int[] inputClasses, int epoch) {
 		this.inputs = inputs;
 		this.inputClasses = inputClasses;
 		weights = new double[inputs[0].length];
+		this.epoch = epoch;
 	}
 
 	double classify(double[] inputs) {

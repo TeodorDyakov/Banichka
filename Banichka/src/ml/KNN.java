@@ -16,10 +16,11 @@ public class KNN {
 		for (int j = 0; j < k; j++) {
 
 			double minDist = Double.POSITIVE_INFINITY;
-			for (int i = 0; i < trainSet.size(); i++)
-				if (minDist > distance[i])
+			for (int i = 0; i < trainSet.size(); i++) {
+				if (minDist > distance[i]) {
 					minDist = distance[i];
-
+				}
+			}
 			for (int i = 0; i < trainSet.size(); i++)
 				if (minDist == distance[i]) {
 					distance[i] = Double.POSITIVE_INFINITY;

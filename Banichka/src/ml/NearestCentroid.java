@@ -14,8 +14,10 @@ public class NearestCentroid {
 		Map<String, Data> catToCentroid = new HashMap<>();
 		for (Data node : train) {
 			map.put(node.category, map.getOrDefault(node.category, 0) + 1);
+
 			Data centroid = catToCentroid.getOrDefault(node.category,
 					new Data(node.category, new double[node.features.length]));
+
 			for (int i = 0; i < node.features.length; i++) {
 				centroid.features[i] += node.features[i];
 			}

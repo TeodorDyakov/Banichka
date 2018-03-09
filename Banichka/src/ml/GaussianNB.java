@@ -6,23 +6,24 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 public class GaussianNB {
 
 	int totalNodes = 0;
 
-	public Map<String, DescriptiveStatistics[]> stats = new HashMap<>();
+	public Map<String, SummaryStatistics[]> stats = new HashMap<>();
+	public Map<String, NormalDistribution[]> categoryToND = new HashMap<>();
 
 	public void train(List<Data> trainSet) {
 		totalNodes = trainSet.size();
 		for (Data node : trainSet) {
-			DescriptiveStatistics[] statistics = stats.get(node.category);
+			SummaryStatistics[] statistics = stats.get(node.category);
 
 			if (statistics == null) {
-				statistics = new DescriptiveStatistics[node.features.length];
+				statistics = new SummaryStatistics[node.features.length];
 				for (int i = 0; i < statistics.length; i++) {
-					statistics[i] = new DescriptiveStatistics();
+					statistics[i] = new SummaryStatistics();
 				}
 			}
 
@@ -31,24 +32,31 @@ public class GaussianNB {
 			}
 			stats.putIfAbsent(node.category, statistics);
 		}
+
+		for (Entry<String, SummaryStatistics[]> e : stats.entrySet()) {
+			if (categoryToND.get(e.getKey()) == null) {
+				NormalDistribution[] ndArray = new NormalDistribution[e.getValue().length];
+				for (int i = 0; i < e.getValue().length; i++) {
+					double sd = e.getValue()[i].getStandardDeviation();
+					ndArray[i] = new NormalDistribution(e.getValue()[i].getMean(), sd <= 0 ? 1 : sd);
+				}
+				categoryToND.put(e.getKey(), ndArray);
+			}
+
+		}
 	}
 
 	public String classify(Data node) {
 		double max = Double.NEGATIVE_INFINITY;
 		String MAP = null;
-		for (Entry<String, DescriptiveStatistics[]> e : stats.entrySet()) {
-			DescriptiveStatistics[] stats = e.getValue();
+		for (Entry<String, SummaryStatistics[]> e : stats.entrySet()) {
+			SummaryStatistics[] stats = e.getValue();
 
 			double prob = Math.log((double) stats[0].getN() / totalNodes);
 
 			for (int i = 0; i < stats.length; i++) {
-				if (stats[i].getStandardDeviation() <= 0) {
-					stats[i].addValue(Double.MIN_VALUE);
-					stats[i].addValue(Double.MIN_VALUE);
-				}
-				NormalDistribution nd = new NormalDistribution(stats[i].getMean(),
-						stats[i].getStandardDeviation());
-				prob += nd.logDensity(node.features[i]);
+				prob += categoryToND.get(e.getKey())[i].logDensity(node.features[i]);
+				max++;
 			}
 			if (max <= prob) {
 				max = prob;

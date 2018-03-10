@@ -3,7 +3,8 @@ package ml;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+
+import util.Util;
 
 public class KNN implements Classifier {
 
@@ -18,38 +19,26 @@ public class KNN implements Classifier {
 	}
 
 	@Override
-	public String classify(Data m) {
+	public String classify(Data data) {
 
-		double[] distance = new double[trainSet.size()];
+		double[] distanceCache = new double[trainSet.size()];
 		Map<String, Integer> freq = new HashMap<>();
+
 		for (int i = 0; i < trainSet.size(); i++)
-			distance[i] = Distance.distance(m, trainSet.get(i), distanceFunction);
+			distanceCache[i] = Distance.distance(data, trainSet.get(i), distanceFunction);
 
 		for (int j = 0; j < k; j++) {
 
-			double minDist = Double.POSITIVE_INFINITY;
-			for (int i = 0; i < trainSet.size(); i++) {
-				if (minDist > distance[i]) {
-					minDist = distance[i];
-				}
-			}
+			double minDist = Util.min(distanceCache);
 
 			for (int i = 0; i < trainSet.size(); i++)
-				if (minDist == distance[i]) {
-					distance[i] = Double.POSITIVE_INFINITY;
+				if (minDist == distanceCache[i]) {
+					distanceCache[i] = Double.POSITIVE_INFINITY;
 					freq.put(trainSet.get(i).category, freq.getOrDefault(trainSet.get(i).category, 0) + 1);
 				}
 
 		}
-		int max = 0;
-		String category = "";
-		for (Entry<String, Integer> e : freq.entrySet()) {
-			if (max < e.getValue()) {
-				category = e.getKey();
-				max = e.getValue();
-			}
-		}
-		return category;
+		return Util.getKeyOfMaxValue(freq);
 	}
 
 }

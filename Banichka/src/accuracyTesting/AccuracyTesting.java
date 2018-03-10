@@ -14,7 +14,7 @@ public class AccuracyTesting {
 			}
 		}
 		double accu = (double) correct / test.size();
-		System.out.println(c.getClass().toString() + "accuracy: " + accu);
+		System.out.println(c.getClass().toString().replace("class", "") + " accuracy: " + accu);
 		return accu;
 	}
 }

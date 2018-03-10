@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -19,6 +18,7 @@ import ml.NearestCentroid;
 import util.Util;
 
 public class HandwrittenDigitRecognition {
+
 	public static void main(String[] args) throws IOException {
 
 		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
@@ -27,7 +27,7 @@ public class HandwrittenDigitRecognition {
 		GaussianNB gnb = new GaussianNB();
 		NearestCentroid nc = new NearestCentroid();
 
-		Collections.shuffle(data, new Random(new Random().nextLong()));
+		Collections.shuffle(data);
 
 		int testSz = 500;
 

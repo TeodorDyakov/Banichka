@@ -15,6 +15,7 @@ import ml.Distance;
 import ml.GaussianNB;
 import ml.KNN;
 import ml.NearestCentroid;
+import ml.ZeroR;
 import util.Util;
 
 public class IrisClassification {
@@ -28,16 +29,19 @@ public class IrisClassification {
 		GaussianNB gnb = new GaussianNB();
 		KNN knn = new KNN();
 		NearestCentroid nc = new NearestCentroid();
+		ZeroR zeroR = new ZeroR();
 
 		int testSz = data.size() / 2;
 
+		zeroR.train(data);
 		gnb.train(data.subList(testSz, data.size()));
 		nc.train(data.subList(testSz, data.size()), Distance.Function.Euclidean);
 		knn.train(data.subList(testSz, data.size()), Distance.Function.Euclidean, 1);
-
+		
 		double knnAcc = AccuracyTesting.accuracyTest(knn, data.subList(0, testSz));
 		double gnbAcc = AccuracyTesting.accuracyTest(gnb, data.subList(0, testSz));
 		double ncAcc = AccuracyTesting.accuracyTest(nc, data.subList(0, testSz));
+		double zeroRAcc = AccuracyTesting.accuracyTest(zeroR, data.subList(0, testSz));
 
 	}
 

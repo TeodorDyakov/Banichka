@@ -49,7 +49,7 @@ public class GaussianNB implements Classifier {
 	@Override
 	public String classify(Data node) {
 		double max = Double.NEGATIVE_INFINITY;
-		String MAP = null;
+		String prediction = null;
 		for (Entry<String, SummaryStatistics[]> e : stats.entrySet()) {
 			SummaryStatistics[] stats = e.getValue();
 
@@ -61,10 +61,10 @@ public class GaussianNB implements Classifier {
 			}
 			if (max <= prob) {
 				max = prob;
-				MAP = e.getKey();
+				prediction = e.getKey();
 			}
 		}
-		return MAP;
+		return prediction;
 	}
 
 }

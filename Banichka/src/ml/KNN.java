@@ -9,13 +9,21 @@ import util.Util;
 public class KNN implements Classifier {
 
 	List<Data> trainSet;
-	Distance.Function distanceFunction;
-	int k;
+	Distance.Function distanceFunction = Distance.Function.Euclidean;
+	int k = 1;
 
-	public void train(List<Data> trainSet, Distance.Function d, int k) {
-		this.trainSet = trainSet;
-		this.distanceFunction = d;
+	public KNN setK(int k) {
 		this.k = k;
+		return this;
+	}
+
+	public KNN setDistanceFunction(Distance.Function distanceFunction) {
+		this.distanceFunction = distanceFunction;
+		return this;
+	}
+
+	public void train(List<Data> trainSet) {
+		this.trainSet = trainSet;
 	}
 
 	@Override

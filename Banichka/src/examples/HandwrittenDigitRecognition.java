@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import accuracyTesting.AccuracyTesting;
+import ml.Classifier;
 import ml.Data;
 import ml.Distance;
 import ml.GaussianNB;
@@ -23,17 +24,17 @@ public class HandwrittenDigitRecognition {
 
 		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
 
-		KNN knn = new KNN();
-		GaussianNB gnb = new GaussianNB();
-		NearestCentroid nc = new NearestCentroid();
+		Classifier knn = new KNN().setK(1).setDistanceFunction(Distance.Function.Euclidean);
+		Classifier gnb = new GaussianNB();
+		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
 
 		Collections.shuffle(data);
 
 		int testSz = 500;
 
 		gnb.train(data.subList(testSz, data.size()));
-		nc.train(data.subList(testSz, data.size()), Distance.Function.Euclidean);
-		knn.train(data.subList(testSz, data.size()), Distance.Function.Euclidean, 1);
+		nc.train(data.subList(testSz, data.size()));
+		knn.train(data.subList(testSz, data.size()));
 
 		double knnAcc = AccuracyTesting.accuracyTest(knn, data.subList(0, testSz));
 		double gnbAcc = AccuracyTesting.accuracyTest(gnb, data.subList(0, testSz));

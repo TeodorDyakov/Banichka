@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import accuracyTesting.AccuracyTesting;
+import ml.Classifier;
 import ml.Data;
 import ml.Distance;
 import ml.GaussianNB;
@@ -22,26 +23,26 @@ public class IrisClassification {
 
 	public static void main(String[] args) throws IOException {
 
+		Classifier gnb = new GaussianNB();
+		Classifier knn = new KNN().setDistanceFunction(Distance.Function.Euclidean).setK(1);
+		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
+		Classifier zeroR = new ZeroR();
+
 		List<Data> data = readData(Util.getCSVparser(new File("Iris.csv")));
-
 		Collections.shuffle(data);
-
-		GaussianNB gnb = new GaussianNB();
-		KNN knn = new KNN();
-		NearestCentroid nc = new NearestCentroid();
-		ZeroR zeroR = new ZeroR();
-
 		int testSz = data.size() / 2;
 
-		zeroR.train(data);
-		gnb.train(data.subList(testSz, data.size()));
-		nc.train(data.subList(testSz, data.size()), Distance.Function.Euclidean);
-		knn.train(data.subList(testSz, data.size()), Distance.Function.Euclidean, 1);
-		
-		double knnAcc = AccuracyTesting.accuracyTest(knn, data.subList(0, testSz));
-		double gnbAcc = AccuracyTesting.accuracyTest(gnb, data.subList(0, testSz));
-		double ncAcc = AccuracyTesting.accuracyTest(nc, data.subList(0, testSz));
-		double zeroRAcc = AccuracyTesting.accuracyTest(zeroR, data.subList(0, testSz));
+		List<Data> testSet = data.subList(0, testSz), trainSet = data.subList(testSz, data.size());
+
+		zeroR.train(trainSet);
+		gnb.train(trainSet);
+		nc.train(trainSet);
+		knn.train(trainSet);
+
+		double knnAcc = AccuracyTesting.accuracyTest(knn, testSet),
+				gnbAcc = AccuracyTesting.accuracyTest(gnb, trainSet),
+				ncAcc = AccuracyTesting.accuracyTest(nc, trainSet),
+				zeroRAcc = AccuracyTesting.accuracyTest(zeroR, trainSet);
 
 	}
 

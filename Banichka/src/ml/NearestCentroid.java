@@ -11,10 +11,15 @@ public class NearestCentroid implements Classifier {
 	Collection<Data> centroids;
 	Distance.Function distanceFunction;
 
-	public void train(List<Data> train, Distance.Function d) {
-		this.distanceFunction = d;
+	public NearestCentroid setDistanceFunction(Distance.Function f) {
+		this.distanceFunction = f;
+		return this;
+	}
+
+	public void train(List<Data> train) {
 		Map<String, Integer> map = new HashMap<>();
 		Map<String, Data> catToCentroid = new HashMap<>();
+
 		for (Data node : train) {
 			map.put(node.category, map.getOrDefault(node.category, 0) + 1);
 
@@ -27,6 +32,7 @@ public class NearestCentroid implements Classifier {
 
 			catToCentroid.putIfAbsent(centroid.category, centroid);
 		}
+
 		for (Data node : catToCentroid.values()) {
 			for (int i = 0; i < node.features.length; i++) {
 				node.features[i] /= map.get(node.category);

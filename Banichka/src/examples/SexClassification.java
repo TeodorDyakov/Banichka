@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ml.Data;
+import ml.Distance;
 import ml.GaussianNB;
+import ml.KNN;
+import ml.NearestCentroid;
 
 public class SexClassification {
 	public static void main(String[] args) {
 
 		List<Data> data = new ArrayList<>();
-//
+
 		data.add(new Data("male", new double[] { 6, 180, 12 }));
 		data.add(new Data("male", new double[] { 5.92, 190, 11 }));
 		data.add(new Data("male", new double[] { 5.58, 170, 12 }));
@@ -21,8 +24,16 @@ public class SexClassification {
 		data.add(new Data("female", new double[] { 5.75, 150, 9 }));
 
 		GaussianNB nb = new GaussianNB();
+		NearestCentroid nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
+		KNN knn = new KNN().setDistanceFunction(Distance.Function.Euclidean).setK(1);
+
 		nb.train(data);
+		nc.train(data);
+		knn.train(data);
 
 		System.out.println(nb.classify(new Data(null, new double[] { 6, 130, 8 })));
+		System.out.println(nc.classify(new Data(null, new double[] { 6, 130, 8 })));
+		System.out.println(knn.classify(new Data(null, new double[] { 6, 130, 8 })));
+
 	}
 }

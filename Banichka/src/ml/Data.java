@@ -10,7 +10,7 @@ public class Data {
 	}
 
 	public String category;
-	double[] features;
+	public double[] features;
 
 	public Data(String category, double[] features) {
 		this.category = category;

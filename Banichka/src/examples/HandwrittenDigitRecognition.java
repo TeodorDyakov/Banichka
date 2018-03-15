@@ -24,7 +24,7 @@ public class HandwrittenDigitRecognition {
 
 		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
 
-		Classifier knn = new KNN().setK(1).setDistanceFunction(Distance.Function.Hamming);
+		Classifier knn = new KNN().setK(1).setDistanceFunction(Distance.Function.Euclidean);
 		Classifier gnb = new GaussianNB();
 		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
 

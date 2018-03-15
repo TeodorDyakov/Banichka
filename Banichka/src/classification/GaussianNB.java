@@ -57,7 +57,6 @@ public class GaussianNB implements Classifier {
 
 			for (int i = 0; i < stats.length; i++) {
 				prob += categoryToND.get(e.getKey())[i].logDensity(node.features[i]);
-				max++;
 			}
 			if (max <= prob) {
 				max = prob;

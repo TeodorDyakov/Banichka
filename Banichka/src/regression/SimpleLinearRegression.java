@@ -1,7 +1,5 @@
 package regression;
 
-import org.apache.commons.math3.distribution.BinomialDistribution;
-
 import util.Util;
 
 public class SimpleLinearRegression {
@@ -35,8 +33,6 @@ public class SimpleLinearRegression {
 		slr.fit(x, y);
 		System.out.println(slr.alpha);
 		System.out.println(slr.beta);
-		BinomialDistribution bd = new BinomialDistribution(10000, 0.51);
-		System.out.println(bd.cumulativeProbability(5000));
 	}
 
 }

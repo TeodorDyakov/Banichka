@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import util.Util;
+
 public class NearestCentroid implements Classifier {
 
 	Collection<Data> centroids;
@@ -17,26 +19,22 @@ public class NearestCentroid implements Classifier {
 	}
 
 	public void train(List<Data> train) {
-		Map<String, Integer> map = new HashMap<>();
+		Map<String, Integer> categoryCount = new HashMap<>();
 		Map<String, Data> catToCentroid = new HashMap<>();
 
 		for (Data node : train) {
-			map.put(node.category, map.getOrDefault(node.category, 0) + 1);
+			categoryCount.put(node.category, categoryCount.getOrDefault(node.category, 0) + 1);
 
 			Data centroid = catToCentroid.getOrDefault(node.category,
 					new Data(node.category, new double[node.features.length]));
 
-			for (int i = 0; i < node.features.length; i++) {
-				centroid.features[i] += node.features[i];
-			}
+			centroid.features = Util.addInPlace(centroid.features, node.features);
 
 			catToCentroid.putIfAbsent(centroid.category, centroid);
 		}
 
 		for (Data node : catToCentroid.values()) {
-			for (int i = 0; i < node.features.length; i++) {
-				node.features[i] /= map.get(node.category);
-			}
+			node.features = Util.divideInPlace(node.features, categoryCount.get(node.category));
 		}
 		centroids = new ArrayList<>(catToCentroid.values());
 	}

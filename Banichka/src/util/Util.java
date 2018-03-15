@@ -63,4 +63,18 @@ public class Util {
 		return sum(arr) / arr.length;
 	}
 
+	public static double[] addInPlace(double[] dest, double[] source) {
+		for (int i = 0; i < dest.length; i++) {
+			dest[i] += source[i];
+		}
+		return dest;
+	}
+
+	public static double[] divideInPlace(double[] dest, double div) {
+		for (int i = 0; i < dest.length; i++) {
+			dest[i] /= div;
+		}
+		return dest;
+	}
+
 }

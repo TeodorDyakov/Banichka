@@ -10,13 +10,13 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import accuracyTesting.AccuracyTesting;
-import ml.Classifier;
-import ml.Data;
-import ml.Distance;
-import ml.GaussianNB;
-import ml.KNN;
-import ml.NearestCentroid;
-import ml.ZeroR;
+import classification.Classifier;
+import classification.Data;
+import classification.Distance;
+import classification.GaussianNB;
+import classification.KNN;
+import classification.NearestCentroid;
+import classification.ZeroR;
 import util.Util;
 
 public class IrisClassification {

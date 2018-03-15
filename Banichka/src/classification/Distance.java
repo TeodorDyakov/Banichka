@@ -1,4 +1,4 @@
-package ml;
+package classification;
 
 public class Distance {
 

@@ -3,11 +3,11 @@ package examples;
 import java.util.ArrayList;
 import java.util.List;
 
-import ml.Data;
-import ml.Distance;
-import ml.GaussianNB;
-import ml.KNN;
-import ml.NearestCentroid;
+import classification.Data;
+import classification.Distance;
+import classification.GaussianNB;
+import classification.KNN;
+import classification.NearestCentroid;
 
 public class SexClassification {
 	public static void main(String[] args) {

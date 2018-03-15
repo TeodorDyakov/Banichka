@@ -1,4 +1,4 @@
-package ml;
+package classification;
 
 import java.util.List;
 

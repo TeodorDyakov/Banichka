@@ -2,8 +2,8 @@ package accuracyTesting;
 
 import java.util.List;
 
-import ml.Classifier;
-import ml.Data;
+import classification.Classifier;
+import classification.Data;
 
 public class AccuracyTesting {
 	public static double accuracyTest(Classifier c, List<Data> test) {

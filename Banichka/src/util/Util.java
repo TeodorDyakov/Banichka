@@ -29,10 +29,8 @@ public class Util {
 
 	public static double min(double[] vector) {
 		double min = Double.POSITIVE_INFINITY;
-		for (int i = 0; i < vector.length; i++) {
-			if (min > vector[i]) {
-				min = vector[i];
-			}
+		for (double a : vector) {
+			min = Math.min(min, a);
 		}
 		return min;
 	}

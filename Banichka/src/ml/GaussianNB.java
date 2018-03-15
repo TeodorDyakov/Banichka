@@ -34,7 +34,7 @@ public class GaussianNB implements Classifier {
 		}
 
 		for (Entry<String, SummaryStatistics[]> e : stats.entrySet()) {
-			if (categoryToND.get(e.getKey()) == null) {
+			if (!categoryToND.containsKey(e.getKey())) {
 				NormalDistribution[] ndArray = new NormalDistribution[e.getValue().length];
 				for (int i = 0; i < e.getValue().length; i++) {
 					double sd = e.getValue()[i].getStandardDeviation();

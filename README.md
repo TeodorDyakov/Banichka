@@ -1,4 +1,6 @@
-# Banichka
-Banichka is simple toolkit for classification (K-Nearest neighbour, Nearest Centroid, and Gaussian Naive Bayes).
-
-Simple library implementing some machine learning algorithms for educational purposes.
+A toy machine learning library. Implemented algorithms : 
+K-nearest neigbor,
+Gaussian Naive Bayes,
+Nearest centroid ,
+ZeroR,
+Simple linear regression,

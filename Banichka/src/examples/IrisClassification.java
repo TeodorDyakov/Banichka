@@ -9,14 +9,14 @@ import java.util.List;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import accuracyTesting.AccuracyTesting;
 import classification.Classifier;
-import classification.Data;
-import classification.Distance;
 import classification.GaussianNB;
 import classification.KNN;
 import classification.NearestCentroid;
 import classification.ZeroR;
+import objectModels.Data;
+import objectModels.Distance;
+import util.AccuracyTesting;
 import util.Util;
 
 public class IrisClassification {

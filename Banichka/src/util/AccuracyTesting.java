@@ -1,9 +1,9 @@
-package accuracyTesting;
+package util;
 
 import java.util.List;
 
 import classification.Classifier;
-import classification.Data;
+import objectModels.Data;
 
 public class AccuracyTesting {
 	public static double accuracyTest(Classifier c, List<Data> test) {

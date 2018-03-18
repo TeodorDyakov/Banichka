@@ -1,4 +1,4 @@
-package classification;
+package objectModels;
 
 import java.util.Arrays;
 

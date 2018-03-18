@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import objectModels.Data;
+import objectModels.Distance;
 import util.Util;
 
 public class KNN implements Classifier {

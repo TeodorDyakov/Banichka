@@ -4,3 +4,4 @@ Gaussian Naive Bayes,
 Nearest centroid ,
 ZeroR,
 Simple linear regression,
+Multiclass Perceptron

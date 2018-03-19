@@ -8,13 +8,29 @@ import java.util.Map.Entry;
 
 import objectModels.Data;
 
+/**
+ * Multiclass perceptron
+ * 
+ * @author Teodor
+ *
+ */
 public class Perceptron implements Classifier {
 
-	public Map<String, double[]> classWeights = new HashMap<>();
+	private Map<String, double[]> classWeights = new HashMap<>();
 
-	public double learningRate;
-	public int epoch = 10;
-	public double accuracy = 0;
+	private double lRate;
+	private int epoch = 10;
+	private double accuracy = 0;
+
+	public Perceptron setEpoch(int epoch) {
+		this.epoch = epoch;
+		return this;
+	}
+
+	public Perceptron setLrate(double lrate) {
+		this.lRate = lrate;
+		return this;
+	}
 
 	public void train(List<Data> data) {
 		for (Data d : data) {
@@ -41,7 +57,7 @@ public class Perceptron implements Classifier {
 	}
 
 	public Perceptron(double learningRate, int epoch) {
-		this.learningRate = learningRate;
+		this.lRate = learningRate;
 		this.epoch = epoch;
 	}
 
@@ -75,9 +91,9 @@ public class Perceptron implements Classifier {
 
 	private void adjustWeights(double[] weights, double error, double[] inputs) {
 		for (int i = 0; i < weights.length - 1; i++) {
-			weights[i] += learningRate * error * inputs[i];
+			weights[i] += lRate * error * inputs[i];
 		}
-		weights[weights.length - 1] += learningRate * error;
+		weights[weights.length - 1] += lRate * error;
 	}
 
 	private double dotProduct(double[] inputs, double[] weights) {

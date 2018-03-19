@@ -12,6 +12,7 @@ import org.apache.commons.csv.CSVRecord;
 import classification.Classifier;
 import classification.GaussianNB;
 import classification.KNN;
+import classification.Perceptron;
 import classification.NearestCentroid;
 import classification.ZeroR;
 import objectModels.Data;
@@ -27,6 +28,7 @@ public class IrisClassification {
 		Classifier knn = new KNN().setDistanceFunction(Distance.Function.Euclidean).setK(1);
 		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
 		Classifier zeroR = new ZeroR();
+		Classifier mcp = new Perceptron(0.1, 1000);
 
 		List<Data> data = readData(Util.getCSVparser(new File("Iris.csv")));
 		Collections.shuffle(data);
@@ -39,10 +41,12 @@ public class IrisClassification {
 		nc.train(trainSet);
 		knn.train(trainSet);
 
+		mcp.train(trainSet);
 		double knnAcc = AccuracyTesting.accuracyTest(knn, testSet),
-				gnbAcc = AccuracyTesting.accuracyTest(gnb, trainSet),
-				ncAcc = AccuracyTesting.accuracyTest(nc, trainSet),
-				zeroRAcc = AccuracyTesting.accuracyTest(zeroR, trainSet);
+				gnbAcc = AccuracyTesting.accuracyTest(gnb, testSet),
+				ncAcc = AccuracyTesting.accuracyTest(nc, testSet),
+				zeroRAcc = AccuracyTesting.accuracyTest(zeroR, testSet),
+				mcpAcc = AccuracyTesting.accuracyTest(mcp, testSet);
 
 	}
 

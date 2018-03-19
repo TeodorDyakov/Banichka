@@ -12,6 +12,7 @@ import org.apache.commons.csv.CSVRecord;
 import classification.Classifier;
 import classification.GaussianNB;
 import classification.KNN;
+import classification.Perceptron;
 import classification.NearestCentroid;
 import objectModels.Data;
 import objectModels.Distance;
@@ -22,23 +23,24 @@ public class HandwrittenDigitRecognition {
 
 	public static void main(String[] args) throws IOException {
 
-		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
-
 		Classifier knn = new KNN().setK(1).setDistanceFunction(Distance.Function.Euclidean);
 		Classifier gnb = new GaussianNB();
 		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
+		Classifier mcp = new Perceptron(0.1, 10);
 
+		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
 		Collections.shuffle(data);
-
 		int testSz = 500;
 
 		gnb.train(data.subList(testSz, data.size()));
 		nc.train(data.subList(testSz, data.size()));
 		knn.train(data.subList(testSz, data.size()));
+		mcp.train(data.subList(testSz, data.size()));
 
 		double knnAcc = AccuracyTesting.accuracyTest(knn, data.subList(0, testSz));
 		double gnbAcc = AccuracyTesting.accuracyTest(gnb, data.subList(0, testSz));
 		double ncAcc = AccuracyTesting.accuracyTest(nc, data.subList(0, testSz));
+		double mcpAcc = AccuracyTesting.accuracyTest(mcp, data.subList(0, testSz));
 
 	}
 

@@ -43,6 +43,10 @@ public class Util {
 		return sum;
 	}
 
+	public static double magnitude(double[] arr) {
+		return Math.sqrt(dotProduct(arr, arr));
+	}
+
 	public static double dotProduct(double[] arr, double[] arr1) {
 		double sum = 0.0;
 		for (int i = 0; i < arr.length && i < arr1.length; i++) {

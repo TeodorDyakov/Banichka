@@ -10,7 +10,12 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import objectModels.Data;
 
-public class GaussianNB implements Classifier {
+public class GaussianNB extends Classifier {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 368815961435403116L;
 
 	int totalNodes = 0;
 

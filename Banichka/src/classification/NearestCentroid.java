@@ -10,7 +10,12 @@ import objectModels.Data;
 import objectModels.Distance;
 import util.Util;
 
-public class NearestCentroid implements Classifier {
+public class NearestCentroid extends Classifier {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8705200328868079154L;
 
 	Collection<Data> centroids;
 	Distance.Function distanceFunction;

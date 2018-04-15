@@ -7,10 +7,14 @@ import java.util.Map;
 import objectModels.Data;
 import util.Util;
 
-public class ZeroR implements Classifier {
+public class ZeroR extends Classifier {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6177639131047586090L;
 	/*
-	 * This is the simplest classifer that can possibly exist. It just retruns
-	 * the most common category in the dataset
+	 * This is the simplest classifer that can exist. It just retruns the most
+	 * common category in the dataset
 	 */
 	String prediction = "";
 

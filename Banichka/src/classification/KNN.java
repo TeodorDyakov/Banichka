@@ -8,8 +8,12 @@ import objectModels.Data;
 import objectModels.Distance;
 import util.Util;
 
-public class KNN implements Classifier {
+public class KNN extends Classifier {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6427966460938350044L;
 	List<Data> trainSet;
 	Distance.Function distanceFunction = Distance.Function.Euclidean;
 	int k = 1;

@@ -14,7 +14,12 @@ import objectModels.Data;
  * @author Teodor
  *
  */
-public class Perceptron implements Classifier {
+public class Perceptron extends Classifier {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 404046981859425428L;
 
 	private Map<String, double[]> classWeights = new HashMap<>();
 

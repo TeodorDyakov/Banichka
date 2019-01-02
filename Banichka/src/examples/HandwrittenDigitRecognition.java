@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -12,8 +13,8 @@ import org.apache.commons.csv.CSVRecord;
 import classification.Classifier;
 import classification.GaussianNB;
 import classification.KNN;
-import classification.Perceptron;
 import classification.NearestCentroid;
+import classification.Perceptron;
 import objectModels.Data;
 import objectModels.Distance;
 import util.AccuracyTesting;
@@ -29,13 +30,14 @@ public class HandwrittenDigitRecognition {
 		Classifier mcp = new Perceptron(0.1, 10);
 
 		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
-		Collections.shuffle(data);
-		int testSz = 500;
-
-		gnb.train(data.subList(testSz, data.size()));
-		nc.train(data.subList(testSz, data.size()));
-		knn.train(data.subList(testSz, data.size()));
-		mcp.train(data.subList(testSz, data.size()));
+		Collections.shuffle(data, new Random(23));
+		int testSz = 10000;
+		int max = 20000
+				;
+		gnb.train(data.subList(testSz, max));
+		nc.train(data.subList(testSz, max));
+		knn.train(data.subList(testSz, max));
+		mcp.train(data.subList(testSz, max));
 
 		double knnAcc = AccuracyTesting.accuracyTest(knn, data.subList(0, testSz));
 		double gnbAcc = AccuracyTesting.accuracyTest(gnb, data.subList(0, testSz));

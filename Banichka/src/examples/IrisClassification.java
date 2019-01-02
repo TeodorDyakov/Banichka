@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -12,8 +13,8 @@ import org.apache.commons.csv.CSVRecord;
 import classification.Classifier;
 import classification.GaussianNB;
 import classification.KNN;
-import classification.Perceptron;
 import classification.NearestCentroid;
+import classification.Perceptron;
 import classification.ZeroR;
 import objectModels.Data;
 import objectModels.Distance;
@@ -31,11 +32,13 @@ public class IrisClassification {
 		Classifier mcp = new Perceptron(0.1, 1000);
 
 		List<Data> data = readData(Util.getCSVparser(new File("Iris.csv")));
-		Collections.shuffle(data);
-		int testSz = data.size() / 2;
+		Collections.shuffle(data, new Random(11));
+		int testSz = data.size() -200;
 
 		List<Data> testSet = data.subList(0, testSz), trainSet = data.subList(testSz, data.size());
-
+		
+		util.Normalizer.minMaxNormalize(data);
+		
 		zeroR.train(trainSet);
 		gnb.train(trainSet);
 		nc.train(trainSet);

@@ -7,21 +7,25 @@ public class Distance {
 	}
 
 	public static double distance(Data node1, Data node2, Function d) {
+		return distance(node1.features, node2.features, d);
+	}
+
+	public static double distance(double[] vec1, double[] vec2, Function d) {
 		double dist = 0, productSum = 0, sqSum1 = 0, sqSum2 = 0;
-		for (int i = 0; i < node1.features.length; i++) {
+		for (int i = 0; i < vec1.length; i++) {
 
 			if (d == Function.Hamming)
-				if (node1.features[i] != node2.features[i])
+				if (vec1[i] != vec2[i])
 					dist++;
 
 			if (d == Function.Euclidean)
-				dist += Math.pow(Math.abs(node1.features[i] - node2.features[i]), 2);
+				dist += Math.pow(Math.abs(vec1[i] - vec2[i]), 2);
 
 			if (d == Function.CosineSimilarity) {
-				productSum += node1.features[i] * node2.features[i];
+				productSum += vec1[i] * vec2[i];
 
-				sqSum1 += node1.features[i] * node1.features[i];
-				sqSum2 += node2.features[i] * node2.features[i];
+				sqSum1 += vec1[i] * vec1[i];
+				sqSum2 += vec2[i] * vec2[i];
 			}
 		}
 

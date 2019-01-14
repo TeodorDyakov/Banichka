@@ -15,6 +15,7 @@ import classification.GaussianNB;
 import classification.KNN;
 import classification.NearestCentroid;
 import classification.Perceptron;
+import classification.QuadraticDiscriminantAnalysis;
 import classification.ZeroR;
 import objectModels.Data;
 import objectModels.Distance;
@@ -30,26 +31,27 @@ public class IrisClassification {
 		Classifier nc = new NearestCentroid().setDistanceFunction(Distance.Function.Euclidean);
 		Classifier zeroR = new ZeroR();
 		Classifier mcp = new Perceptron(0.1, 1000);
-
+		Classifier qda = new QuadraticDiscriminantAnalysis();
 		List<Data> data = readData(Util.getCSVparser(new File("Iris.csv")));
 		Collections.shuffle(data, new Random(11));
-		int testSz = data.size() -200;
+		int testSz = data.size() - 200;
 
 		List<Data> testSet = data.subList(0, testSz), trainSet = data.subList(testSz, data.size());
-		
-		util.Normalizer.minMaxNormalize(data);
-		
+
+		// util.Normalizer.minMaxNormalize(data);
+
 		zeroR.train(trainSet);
 		gnb.train(trainSet);
 		nc.train(trainSet);
 		knn.train(trainSet);
-
+		qda.train(trainSet);
 		mcp.train(trainSet);
 		double knnAcc = AccuracyTesting.accuracyTest(knn, testSet),
 				gnbAcc = AccuracyTesting.accuracyTest(gnb, testSet),
 				ncAcc = AccuracyTesting.accuracyTest(nc, testSet),
 				zeroRAcc = AccuracyTesting.accuracyTest(zeroR, testSet),
-				mcpAcc = AccuracyTesting.accuracyTest(mcp, testSet);
+				mcpAcc = AccuracyTesting.accuracyTest(mcp, testSet),
+		qdaAcc = AccuracyTesting.accuracyTest(qda, testSet);
 
 	}
 

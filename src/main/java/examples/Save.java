@@ -20,7 +20,7 @@ public class Save {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		Classifier gnb = new GaussianNB();
 
-		List<Data> data = readData(Util.getCSVparser(new File("Iris.csv")));
+		List<Data> data = readData(Util.getCSVparser(new File("datasets/Iris.csv")));
 		Collections.shuffle(data);
 		int testSz = data.size() / 2;
 
@@ -28,9 +28,10 @@ public class Save {
 
 		gnb.train(trainSet);
 		gnb.saveModelToFile(new File("model.txt"));
+
 		Classifier gnb1 = Classifier.readModelFromFile(new File("model.txt"));
-		double gnb1nAcc = AccuracyTesting.accuracyTest(gnb1, testSet),
-				gnbAcc = AccuracyTesting.accuracyTest(gnb, testSet);
+		AccuracyTesting.accuracyTest(gnb1, testSet);
+		AccuracyTesting.accuracyTest(gnb, testSet);
 
 	}
 

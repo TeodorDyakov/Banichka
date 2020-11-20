@@ -31,8 +31,8 @@ public class HandwrittenDigitRecognition {
 
 		List<Data> data = readData(Util.getCSVparser(new File("digits.txt")));
 		Collections.shuffle(data, new Random(23));
-		int testSz = 10000;
-		int max = 20000;
+		int testSz = 1000;
+		int max = 2000;
 		
 		gnb.train(data.subList(testSz, max));
 		nc.train(data.subList(testSz, max));

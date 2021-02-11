@@ -5,4 +5,4 @@ Implemented algorithms :
 * Nearest centroid
 * ZeroR
 * Multiclass Perceptron(not to be confused with Multilayer Perceptron)
-* Quadratic Discrimant Analysis
+* Quadratic Discriminant Analysis
